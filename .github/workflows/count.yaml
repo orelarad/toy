@@ -7,6 +7,12 @@ permissions:
     contents: read
 
 jobs:
+    hello:
+        runs-on: ubuntu-latest
+        steps:
+            - name: sayHello
+              run: |
+                echo "Hi"
     count:
         runs-on: ubuntu-latest
         steps:
