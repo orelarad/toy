@@ -1,0 +1,26 @@
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    count:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+
+            - name: install loc
+              run: |
+                sudo apt-get update
+                sudo apt-get install -y cloc
+ 
+            - name: run cloc
+              run: |
+                echo "Counting in ${GITHUB_WORKSPACE}"
+                cloc "${GITHUB_WORKSPACE}" >> cloc_output
+                echo "Results:" >> "${GITHUB_STEP_SUMMARY}"
+                cat cloc_output >> "${GITHUB_STEP_SUMMARY}"
